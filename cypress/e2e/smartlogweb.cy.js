@@ -1,4 +1,4 @@
-describe('Inobag|BackOffice', () => {
+  describe('Inobag|BackOffice', () => {
   beforeEach(() => {
     cy.visit('https://portal.smartlogweb.com')
   })
@@ -24,13 +24,36 @@ describe('Inobag|BackOffice', () => {
     cy.get('button[data-componentid="ext-button-1"]')
       .should('not.be.disabled')
       .click({ force: true })
-      cy.get('button[data-componentid="ext-button-5"]').click()
+    cy.get('button[data-componentid="ext-button-5"]').click()
 
 
-// Aguarda o elemento com as opções ficar visível
-cy.get('#ext-element-226').click({ force: true });
-     
+    // Aguarda o elemento com as opções ficar visível
+    cy.get('#ext-element-226').click({ force: true });
+
+    // Adicionar uma separação
+    cy.get('#ext-element-357').click()
+
+ // Aguarda o botão do combo de separação aparecer e clica
+cy.get('#ext-element-473', { timeout: 10000 }).should('be.visible').click({ force: true });
+
+// Agora espera o combo com as opções aparecer
+cy.get('#ext-element-641', {timeout: 15000 }).should('be.visible');
+
+// Clica na opção "Manual"
+cy.get('[id^="ext-simplelistitem"]').contains('Manual').click({ force: true });
+
+// Insere o local da baixa
+cy.get('#ext-expandtrigger-3 > .x-icon-el', {timeout: 10000 }).type('Moon').click();
+
+// Insere o colobarador 
+//cy.get('#ext-expandtrigger-4 > .x-icon-el').type('monica.anderson', { delay: 200 }).blur();
+cy.get('#ext-element-504',  {timeout: 15000 }).type('Monica', { delay: 200 }).blur();
+cy.get('[id^="ext-simplelistitem"]', { timeout: 10000 })
+  .should('contain.text', 'Monica');
+
+// Clica no botão +Adiconar Itens quando o mesmo for habilitado
+cy.get('#ext-element-600').click();
+
   })
 
- 
 })
