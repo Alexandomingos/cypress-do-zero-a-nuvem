@@ -24,5 +24,13 @@ describe('Inobag|BackOffice', () => {
     cy.get('button[data-componentid="ext-button-1"]')
       .should('not.be.disabled')
       .click({ force: true })
+      cy.get('button[data-componentid="ext-button-5"]').click()
+
+
+// Aguarda o elemento com as opções ficar visível
+cy.get('#ext-element-226').click({ force: true });
+     
   })
+
+ 
 })
